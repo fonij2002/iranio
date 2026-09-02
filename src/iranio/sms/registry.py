@@ -2,6 +2,7 @@ from collections.abc import Callable
 
 from iranio.core.config import ProviderConfig
 from iranio.sms.base import BaseSMSProvider
+from iranio.sms.providers.ghasedak import Ghasedak
 from iranio.sms.providers.kavenegar import Kavenegar
 
 SMSProviderFactory = Callable[
@@ -12,6 +13,7 @@ SMSProviderFactory = Callable[
 
 SMS_PROVIDERS: dict[str, SMSProviderFactory] = {
     "kavenegar": Kavenegar,
+    "ghasedak": Ghasedak,
 }
 
 

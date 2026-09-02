@@ -4,6 +4,7 @@ from iranio.core.config import ProviderConfig
 from iranio.sms.base import BaseSMSProvider
 from iranio.sms.providers.ghasedak import Ghasedak
 from iranio.sms.providers.kavenegar import Kavenegar
+from iranio.sms.providers.smsir import SMSIR
 
 SMSProviderFactory = Callable[
     [ProviderConfig],
@@ -14,6 +15,7 @@ SMSProviderFactory = Callable[
 SMS_PROVIDERS: dict[str, SMSProviderFactory] = {
     "kavenegar": Kavenegar,
     "ghasedak": Ghasedak,
+    "smsir": SMSIR,
 }
 
 

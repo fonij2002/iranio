@@ -9,6 +9,9 @@ class APIResponse(BaseModel):
     """
 
     success: bool
+
     message: str | None = None
+
     data: dict[str, Any] | None = None
+
     raw: dict[str, Any] | None = None

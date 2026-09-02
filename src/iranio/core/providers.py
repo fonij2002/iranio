@@ -1,21 +1,21 @@
 from abc import ABC, abstractmethod
-from typing import Any
+from typing import Generic, TypeVar
 
-from iranio.core.models import APIResponse
+RequestType = TypeVar("RequestType")
+
+ResponseType = TypeVar("ResponseType")
 
 
-class BaseProvider(ABC):
+class BaseProvider(ABC, Generic[RequestType, ResponseType]):
     """
-    Base interface for all providers.
+    Generic provider interface.
     """
 
     @abstractmethod
     def send(
         self,
-        *args: Any,
-        **kwargs: Any,
-    ) -> APIResponse:
+        request: RequestType,
+    ) -> ResponseType:
         """
-        Send request to provider.
+        Execute provider operation.
         """
-        pass

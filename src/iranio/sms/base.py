@@ -6,6 +6,7 @@ from iranio.sms.models import (
     BulkSMSRequest,
     OTPRequest,
     SendSMSRequest,
+    SMSAccountInfo,
     SMSResponse,
     SMSStatus,
 )
@@ -24,6 +25,12 @@ class BaseSMSProvider(
     ) -> None:
 
         self.config = config
+
+    @abstractmethod
+    def account_info(
+        self,
+    ) -> SMSAccountInfo:
+        pass
 
     @abstractmethod
     def send(

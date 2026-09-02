@@ -1,4 +1,3 @@
-from typing import Any
 
 from iranio.core.config import ProviderConfig
 from iranio.sms.base import BaseSMSProvider
@@ -6,6 +5,7 @@ from iranio.sms.models import (
     BulkSMSRequest,
     OTPRequest,
     SendSMSRequest,
+    SMSAccountInfo,
     SMSResponse,
     SMSStatus,
 )
@@ -119,9 +119,14 @@ class Kavenegar(BaseSMSProvider):
 
     def account_info(
         self,
-    ) -> dict[str, Any]:
+    ) -> SMSAccountInfo:
 
-        return self.client.request(
+        response = self.client.request(
             "GET",
             self._url(ACCOUNT_INFO),
+        )
+
+        return SMSAccountInfo(
+            data=response,
+            raw=response,
         )

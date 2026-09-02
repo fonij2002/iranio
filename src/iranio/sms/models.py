@@ -3,6 +3,16 @@ from typing import Any
 from pydantic import BaseModel, Field
 
 
+class SMSAccountInfo(BaseModel):
+    """
+    Provider account information.
+    """
+
+    data: dict[str, Any] | None = None
+
+    raw: dict[str, Any] | None = None
+
+
 class SendSMSRequest(BaseModel):
     phone: str
     message: str

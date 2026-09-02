@@ -12,7 +12,10 @@ SMSProviderFactory = Callable[
 ]
 
 
-SMS_PROVIDERS: dict[str, SMSProviderFactory] = {
+SMS_PROVIDERS: dict[
+    str,
+    SMSProviderFactory,
+] = {
     "kavenegar": Kavenegar,
     "ghasedak": Ghasedak,
     "smsir": SMSIR,
@@ -24,9 +27,10 @@ def get_sms_provider(
     config: ProviderConfig,
 ) -> BaseSMSProvider:
 
-    provider = SMS_PROVIDERS.get(name)
+    factory = SMS_PROVIDERS.get(name)
 
-    if provider is None:
+    if factory is None:
+
         raise ValueError(f"Unsupported SMS provider: {name}")
 
-    return provider(config)
+    return factory(config)

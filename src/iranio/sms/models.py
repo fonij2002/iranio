@@ -1,23 +1,41 @@
+from typing import Any
+
 from pydantic import BaseModel, Field
 
 
 class SendSMSRequest(BaseModel):
-    """
-    Standard SMS sending request.
-    """
-
-    phone: str = Field(description="Destination phone number")
-
-    message: str = Field(description="SMS message content")
+    phone: str
+    message: str
+    sender: str | None = None
 
 
-class SendSMSResponse(BaseModel):
-    """
-    Standard SMS sending response.
-    """
+class BulkSMSRequest(BaseModel):
+    phones: list[str]
+    message: str
+    sender: str | None = None
+
+
+class OTPRequest(BaseModel):
+    phone: str
+    template: str
+    tokens: dict[str, str]
+
+
+class SMSResponse(BaseModel):
 
     success: bool
 
-    message_id: str | None = None
-
     message: str | None = None
+
+    message_ids: list[str] = Field(default_factory=list)
+
+    raw: dict[str, Any] | None = None
+
+
+class SMSStatus(BaseModel):
+
+    message_id: str
+
+    status: str
+
+    description: str | None = None

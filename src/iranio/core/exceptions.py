@@ -26,3 +26,9 @@ class NetworkError(IranioException):
     """
     Raised when network communication fails.
     """
+
+
+class SMSProviderError(ProviderError):
+    """
+    SMS provider error.
+    """

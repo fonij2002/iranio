@@ -1,16 +1,54 @@
+from abc import abstractmethod
+
+from iranio.core.config import ProviderConfig
 from iranio.core.providers import BaseProvider
 from iranio.sms.models import (
+    BulkSMSRequest,
+    OTPRequest,
     SendSMSRequest,
-    SendSMSResponse,
+    SMSResponse,
+    SMSStatus,
 )
 
 
 class BaseSMSProvider(
     BaseProvider[
         SendSMSRequest,
-        SendSMSResponse,
+        SMSResponse,
     ]
 ):
-    """
-    Base SMS provider interface.
-    """
+
+    def __init__(
+        self,
+        config: ProviderConfig,
+    ) -> None:
+
+        self.config = config
+
+    @abstractmethod
+    def send(
+        self,
+        request: SendSMSRequest,
+    ) -> SMSResponse:
+        pass
+
+    @abstractmethod
+    def send_bulk(
+        self,
+        request: BulkSMSRequest,
+    ) -> SMSResponse:
+        pass
+
+    @abstractmethod
+    def send_otp(
+        self,
+        request: OTPRequest,
+    ) -> SMSResponse:
+        pass
+
+    @abstractmethod
+    def status(
+        self,
+        message_id: str,
+    ) -> SMSStatus:
+        pass
